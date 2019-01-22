@@ -131,7 +131,14 @@ open class TokenField: UIView, UITextFieldDelegate, BackspaceTextFieldDelegate {
   /// Customized attributes for tokens in the highlighted state.
   public var highlightedTokenAttributes: [NSAttributedStringKey: NSObject]? {
     didSet {
-      tokens.forEach { $0.highlightedTextAttributes = normalTokenAttributes ?? [:] }
+      tokens.forEach { $0.highlightedTextAttributes = highlightedTokenAttributes ?? [:] }
+    }
+  }
+
+  /// Customized attributes for the delimiters.
+  public var delimiterTokenAttributes: [NSAttributedStringKey: NSObject]? {
+    didSet {
+      tokens.forEach { $0.delimiterTokenAttributes = delimiterTokenAttributes ?? [:] }
     }
   }
 

@@ -60,6 +60,15 @@ internal class Token: UIView {
     }
   }
 
+  var delimiterTokenAttributes: [NSAttributedStringKey: NSObject] = [
+    .foregroundColor: UIColor(red: 0.14, green: 0.38, blue: 0.95, alpha: 1),
+    .backgroundColor: UIColor.clear
+  ] {
+    didSet {
+      updateTextLabel()
+    }
+  }
+
   // MARK: - Private Properties
 
   private(set) lazy var delimiterLabel: UILabel = {
@@ -117,8 +126,8 @@ internal class Token: UIView {
     attributes[.backgroundColor] = nil
     textLabel.attributedText = NSAttributedString(string: text, attributes: attributes)
 
-    delimiterLabel.textColor = normalTextAttributes[.foregroundColor] as? UIColor
-    delimiterLabel.font = normalTextAttributes[.font] as? UIFont
+    delimiterLabel.textColor = (delimiterTokenAttributes[.foregroundColor] ?? normalTextAttributes[.foregroundColor]) as? UIColor
+    delimiterLabel.font = (delimiterTokenAttributes[.font] ?? normalTextAttributes[.font]) as? UIFont
   }
 
   private func setUpSubviews() {
