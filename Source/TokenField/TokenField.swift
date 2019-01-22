@@ -464,6 +464,7 @@ open class TokenField: UIView, UITextFieldDelegate, BackspaceTextFieldDelegate {
   open func addToken(text: String) {
     tokens.append(customizedToken(with: text))
     layoutTokenTextField()
+    togglePlaceholderIfNeeded()
   }
 
   /// Creates a token with the current input text.
