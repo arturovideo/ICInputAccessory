@@ -173,7 +173,7 @@ open class TokenField: UIView, UITextFieldDelegate, BackspaceTextFieldDelegate {
 
   // MARK: - Private Properties
 
-  private var tokens = [Token]()
+  public private(set) var tokens = [Token]()
 
   private lazy var inputTextField: BackspaceTextField = {
     let _textField = BackspaceTextField()
@@ -460,6 +460,11 @@ open class TokenField: UIView, UITextFieldDelegate, BackspaceTextFieldDelegate {
   }
 
   // MARK: - Public Methods
+
+  open func addToken(text: String) {
+    tokens.append(customizedToken(with: text))
+    layoutTokenTextField()
+  }
 
   /// Creates a token with the current input text.
   open func completeCurrentInputText() {

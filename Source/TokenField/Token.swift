@@ -26,7 +26,7 @@
 
 import UIKit
 
-internal class Token: UIView {
+public class Token: UIView {
 
   var text = "" {
     didSet {
@@ -99,7 +99,7 @@ internal class Token: UIView {
     setUpSubviews()
   }
 
-  convenience init(
+  public convenience init(
     text: String,
     delimiter: String = ",",
     normalAttributes: [NSAttributedStringKey: NSObject]? = nil,
