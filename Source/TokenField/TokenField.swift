@@ -468,6 +468,15 @@ open class TokenField: UIView, UITextFieldDelegate, BackspaceTextFieldDelegate {
     togglePlaceholderIfNeeded()
   }
 
+  open func removeToken(_ tokenToRemove: Token) {
+    for (index, token) in tokens.enumerated() where token == tokenToRemove {
+      tokens.remove(at: index)
+      layoutTokenTextField()
+      togglePlaceholderIfNeeded()
+      return
+    }
+  }
+
   /// Creates a token with the current input text.
   open func completeCurrentInputText() {
     guard let text = inputTextField.text, !text.isEmpty else {
