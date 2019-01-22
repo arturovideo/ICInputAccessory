@@ -103,11 +103,13 @@ public class Token: UIView {
     text: String,
     delimiter: String = ",",
     normalAttributes: [NSAttributedStringKey: NSObject]? = nil,
-    highlightedAttributes: [NSAttributedStringKey: NSObject]? = nil
+    highlightedAttributes: [NSAttributedStringKey: NSObject]? = nil,
+    delimiterAttributes: [NSAttributedStringKey: NSObject]? = nil
   ) {
     self.init()
     if let attributes = normalAttributes { normalTextAttributes = attributes }
     if let attributes = highlightedAttributes { highlightedTextAttributes = attributes }
+    if let attributes = delimiterAttributes { delimiterTokenAttributes = attributes }
     delimiterLabel.text = delimiter
     ({
       // Workaround to trigger didSet inside the initializer

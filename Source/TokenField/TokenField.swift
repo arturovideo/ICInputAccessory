@@ -390,9 +390,9 @@ open class TokenField: UIView, UITextFieldDelegate, BackspaceTextFieldDelegate {
 
   private func customizedToken(with text: String) -> Token {
     if let string = delegate?.tokenField?(self, subsequentDelimiterForCompletedText: text) {
-      return Token(text: text, delimiter: string, normalAttributes: normalTokenAttributes, highlightedAttributes: highlightedTokenAttributes)
+      return Token(text: text, delimiter: string, normalAttributes: normalTokenAttributes, highlightedAttributes: highlightedTokenAttributes, delimiterAttributes: delimiterTokenAttributes)
     } else {
-      return Token(text: text, normalAttributes: normalTokenAttributes, highlightedAttributes: highlightedTokenAttributes)
+      return Token(text: text, normalAttributes: normalTokenAttributes, highlightedAttributes: highlightedTokenAttributes, delimiterAttributes: delimiterTokenAttributes)
     }
   }
 
