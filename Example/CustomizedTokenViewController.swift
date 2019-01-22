@@ -107,13 +107,13 @@ class CustomizedTokenViewController: UIViewController, TokenFieldDelegate {
     return text != "42"
   }
 
-  func tokenField(_ tokenField: TokenField, didCompleteText text: String) {
-    print("Added \"\(text)\"")
+  func tokenField(_ tokenField: TokenField, didCompleteToken token: Token) {
+    print("Added \"\(token.text)\"")
     updateTexts()
   }
 
-  func tokenField(_ tokenField: TokenField, didDeleteText text: String, atIndex index: Int) {
-    print("Deleted \"\(text)\"")
+  func tokenField(_ tokenField: TokenField, didDeleteToken token: Token, atIndex index: Int) {
+    print("Deleted \"\(token.text)\"")
     updateTexts()
   }
 

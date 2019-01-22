@@ -28,7 +28,7 @@ import UIKit
 
 public class Token: UIView {
 
-  var text = "" {
+  public var text = "" {
     didSet {
       updateTextLabel()
       frame = CGRect(origin: CGPoint.zero, size: systemLayoutSizeFitting(UILayoutFittingCompressedSize))

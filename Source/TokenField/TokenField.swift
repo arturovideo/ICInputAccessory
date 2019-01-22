@@ -39,9 +39,9 @@ import UIKit
   /// Asks the delegate if the text should become a token in the token field.
   @objc optional func tokenField(_ tokenField: TokenField, shouldCompleteText text: String) -> Bool
   /// Tells the delegate that the text becomes a token in the token field.
-  @objc optional func tokenField(_ tokenField: TokenField, didCompleteText text: String)
+  @objc optional func tokenField(_ tokenField: TokenField, didCompleteToken token: Token)
   /// Tells the delegate that the token at certain index is removed from the token field.
-  @objc optional func tokenField(_ tokenField: TokenField, didDeleteText text: String, atIndex index: Int)
+  @objc optional func tokenField(_ tokenField: TokenField, didDeleteToken token: Token, atIndex index: Int)
   /// Asks the delegate for the subsequent delimiter string for a completed text in the token field.
   @objc optional func tokenField(_ tokenField: TokenField, subsequentDelimiterForCompletedText text: String) -> String
 }
@@ -311,9 +311,10 @@ open class TokenField: UIView, UITextFieldDelegate, BackspaceTextFieldDelegate {
       let newText = String(text[..<index])
 
       if !newText.isEmpty && newText != delimiter && (delegate?.tokenField?(self, shouldCompleteText: newText) ?? true) {
-        tokens.append(customizedToken(with: newText))
+        let newToken = customizedToken(with: newText)
+        tokens.append(newToken)
         layoutTokenTextField()
-        delegate?.tokenField?(self, didCompleteText: newText)
+        delegate?.tokenField?(self, didCompleteToken: newToken)
       }
 
       textField.text = nil
@@ -403,7 +404,7 @@ open class TokenField: UIView, UITextFieldDelegate, BackspaceTextFieldDelegate {
       layoutTokenTextField()
       togglePlaceholderIfNeeded()
       inputTextField.showsCursor = true
-      delegate?.tokenField?(self, didDeleteText: token.text, atIndex: index)
+      delegate?.tokenField?(self, didDeleteToken: token, atIndex: index)
       return true
     }
     return false
@@ -479,9 +480,10 @@ open class TokenField: UIView, UITextFieldDelegate, BackspaceTextFieldDelegate {
     }
 
     inputTextField.text = nil
-    tokens.append(customizedToken(with: text))
+    let newToken = customizedToken(with: text)
+    tokens.append(newToken)
     layoutTokenTextField()
-    delegate?.tokenField?(self, didCompleteText: text)
+    delegate?.tokenField?(self, didCompleteToken: newToken)
   }
 
   /// Removes the input text and all displayed tokens.
