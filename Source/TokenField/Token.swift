@@ -69,6 +69,8 @@ public class Token: UIView {
     }
   }
 
+  public var object: AnyObject?
+
   // MARK: - Private Properties
 
   private(set) lazy var delimiterLabel: UILabel = {
@@ -104,12 +106,14 @@ public class Token: UIView {
     delimiter: String = ",",
     normalAttributes: [NSAttributedStringKey: NSObject]? = nil,
     highlightedAttributes: [NSAttributedStringKey: NSObject]? = nil,
-    delimiterAttributes: [NSAttributedStringKey: NSObject]? = nil
+    delimiterAttributes: [NSAttributedStringKey: NSObject]? = nil,
+    object: AnyObject? = nil
   ) {
     self.init()
     if let attributes = normalAttributes { normalTextAttributes = attributes }
     if let attributes = highlightedAttributes { highlightedTextAttributes = attributes }
     if let attributes = delimiterAttributes { delimiterTokenAttributes = attributes }
+    self.object = object
     delimiterLabel.text = delimiter
     ({
       // Workaround to trigger didSet inside the initializer

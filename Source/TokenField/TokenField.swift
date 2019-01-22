@@ -389,11 +389,11 @@ open class TokenField: UIView, UITextFieldDelegate, BackspaceTextFieldDelegate {
 
   // MARK: - Private Methods
 
-  private func customizedToken(with text: String) -> Token {
+  private func customizedToken(with text: String, object: AnyObject? = nil) -> Token {
     if let string = delegate?.tokenField?(self, subsequentDelimiterForCompletedText: text) {
-      return Token(text: text, delimiter: string, normalAttributes: normalTokenAttributes, highlightedAttributes: highlightedTokenAttributes, delimiterAttributes: delimiterTokenAttributes)
+      return Token(text: text, delimiter: string, normalAttributes: normalTokenAttributes, highlightedAttributes: highlightedTokenAttributes, delimiterAttributes: delimiterTokenAttributes, object: object)
     } else {
-      return Token(text: text, normalAttributes: normalTokenAttributes, highlightedAttributes: highlightedTokenAttributes, delimiterAttributes: delimiterTokenAttributes)
+      return Token(text: text, normalAttributes: normalTokenAttributes, highlightedAttributes: highlightedTokenAttributes, delimiterAttributes: delimiterTokenAttributes, object: object)
     }
   }
 
@@ -462,8 +462,8 @@ open class TokenField: UIView, UITextFieldDelegate, BackspaceTextFieldDelegate {
 
   // MARK: - Public Methods
 
-  open func addToken(text: String) {
-    tokens.append(customizedToken(with: text))
+  open func addToken(text: String, object: AnyObject? = nil) {
+    tokens.append(customizedToken(with: text, object: object))
     layoutTokenTextField()
     togglePlaceholderIfNeeded()
   }
